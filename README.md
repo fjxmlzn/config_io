@@ -1,5 +1,5 @@
 # config_io
-![Tests](https://github.com/fjxmlzn/config_io/workflows/test/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/fjxmlzn/config_io/badge.svg?t=nguDCe)](https://coveralls.io/github/fjxmlzn/config_io)
+![Tests](https://github.com/fjxmlzn/config_io/workflows/test/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/fjxmlzn/config_io/badge.svg?t=nguDCe)](https://coveralls.io/github/fjxmlzn/config_io) [![PyPI version](https://badge.fury.io/py/config_io.svg)](https://badge.fury.io/py/config_io)
 
 `config_io` is a Python package for advanced config reading/parsing/writing. `config_io` currently supports `json` and `yaml` formats.
 
