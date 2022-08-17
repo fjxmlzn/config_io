@@ -44,12 +44,17 @@ class Config(Dict):
         default_config = cls(default_config)
 
         if expand:
-            default_configs = cls._expand(default_config, expand_suffix)
-            default_configs = [cls(v) for v in default_configs]
+            default_configs = default_config.expand(
+                expand_suffix=expand_suffix)
         else:
             default_configs = default_config
 
         return default_configs
+
+    def expand(self, expand_suffix='_expand'):
+        configs = self._expand(self, expand_suffix)
+        configs = [self.__class__(v) for v in configs]
+        return configs
 
     @classmethod
     def _expand(cls, item, expand_suffix):

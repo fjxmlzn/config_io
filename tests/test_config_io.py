@@ -219,6 +219,40 @@ class TestConfigIO(unittest.TestCase):
                       KEY1 + '_expand': True,
                       KEY2: {KEY3: VALUE4, KEY3 + '_expand': True}}])
 
+    def test_expand_method(self):
+        dictionary = {
+            KEY1: [VALUE1, VALUE2],
+            KEY1 + '_expand': True,
+            KEY2: {KEY3: [VALUE3, VALUE4],
+                   KEY3 + '_expand': True}}
+        config = Config(dictionary)
+        self.assertCountEqual(
+            config.expand(),
+            [{KEY1: VALUE1,
+              KEY1 + '_expand': True,
+              KEY2: {KEY3: VALUE3, KEY3 + '_expand': True}},
+             {KEY1: VALUE2,
+              KEY1 + '_expand': True,
+              KEY2: {KEY3: VALUE3, KEY3 + '_expand': True}},
+             {KEY1: VALUE1,
+              KEY1 + '_expand': True,
+              KEY2: {KEY3: VALUE4, KEY3 + '_expand': True}},
+             {KEY1: VALUE2,
+              KEY1 + '_expand': True,
+              KEY2: {KEY3: VALUE4, KEY3 + '_expand': True}}])
+
+    def test_expand_method_in_sub_dict(self):
+        dictionary = {
+            KEY1: [VALUE1, VALUE2],
+            KEY1 + '_expand': True,
+            KEY2: {KEY3: [VALUE3, VALUE4],
+                   KEY3 + '_expand': True}}
+        config = Config(dictionary)
+        self.assertCountEqual(
+            config[KEY2].expand(),
+            [{KEY3: VALUE3, KEY3 + '_expand': True},
+             {KEY3: VALUE4, KEY3 + '_expand': True}])
+
     def setUp(self):
         self._temp_folder = tempfile.mkdtemp()
 

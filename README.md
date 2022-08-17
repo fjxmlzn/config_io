@@ -131,6 +131,20 @@ Loading it would give a list of 4 configs
 ```
 Basically, for the keys such that `{KEY_NAME}_expand` is set to true, `config_io` treats their values as a list of candidate values, and will enumerate all possible combinations of them to generate the list of configs. Note that this feature is turned on only when `expand` is set to true either through the parameter of `load_from_file` or inside the config file.
 
+Expansion can also happen after the config is loaded:
+
+```Python
+>>> config = Config({'k1': {'k2': [1, 2], 'k2_expand': True}})
+>>> config.expand()
+[{'k1': {'k2': 1, 'k2_expand': True}}, {'k1': {'k2': 2, 'k2_expand': True}}]
+```
+or be applied only for a sub-tree of the config:
+
+```Python
+>>> config.k1.expand()
+[{'k2': 1, 'k2_expand': True}, {'k2': 2, 'k2_expand': True}]
+``` 
+
 
 ##### Advanced options
 The keys to expand can be on different levels of the config tree. For example, if `config.json` is
@@ -139,7 +153,7 @@ The keys to expand can be on different levels of the config tree. For example, i
 {"k1": [1, 2],
  "k1_expand": true,
  "k2": {"k3": [3, 4],
-           "k3_expand": true}}
+        "k3_expand": true}}
 ```
 `Config.load_from_file('config.json', expand=True)` would give
 
