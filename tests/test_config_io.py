@@ -73,7 +73,7 @@ class TestConfigIO(unittest.TestCase):
         dictionary = {KEY1: VALUE1, KEY2: VALUE2}
         self.assertEqual(Config(dictionary), dictionary)
 
-    def test_dictionary_assign(self):
+    def test_key_assign(self):
         config = Config()
         config[KEY1] = VALUE1
         config[KEY2] = VALUE2
@@ -85,6 +85,16 @@ class TestConfigIO(unittest.TestCase):
         config.key = 'value'
         dictionary = {'key': 'value'}
         self.assertEqual(config, dictionary)
+
+    def test_missing_property(self):
+        config = Config()
+        with self.assertRaises(KeyError):
+            config.a.b = 1
+
+    def test_missing_key(self):
+        config = Config()
+        with self.assertRaises(KeyError):
+            config['a']['b'] = 1
 
     def test_dump_and_load(self):
         for format_ in ['json', 'yaml']:
