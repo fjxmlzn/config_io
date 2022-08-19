@@ -8,7 +8,7 @@ LONG = (this_directory / "README.md").read_text()
 
 setup(
     name='config_io',
-    version='0.3.0',
+    version='0.4.0',
     packages=['config_io'],
     author='Zinan Lin',
     author_email='linzinan1995@gmail.com',
