@@ -88,12 +88,12 @@ class TestConfigIO(unittest.TestCase):
 
     def test_missing_property(self):
         config = Config()
-        with self.assertRaises(KeyError):
+        with self.assertRaises(AttributeError):
             config.a.b = 1
 
     def test_missing_key(self):
         config = Config()
-        with self.assertRaises(KeyError):
+        with self.assertRaises(AttributeError):
             config['a']['b'] = 1
 
     def test_dump_and_load(self):
