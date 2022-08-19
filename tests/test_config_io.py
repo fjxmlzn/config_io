@@ -73,6 +73,19 @@ class TestConfigIO(unittest.TestCase):
         dictionary = {KEY1: VALUE1, KEY2: VALUE2}
         self.assertEqual(Config(dictionary), dictionary)
 
+    def test_dictionary_assign(self):
+        config = Config()
+        config[KEY1] = VALUE1
+        config[KEY2] = VALUE2
+        dictionary = {KEY1: VALUE1, KEY2: VALUE2}
+        self.assertEqual(config, dictionary)
+
+    def test_property_assign(self):
+        config = Config()
+        config.key = 'value'
+        dictionary = {'key': 'value'}
+        self.assertEqual(config, dictionary)
+
     def test_dump_and_load(self):
         for format_ in ['json', 'yaml']:
             with self.subTest(format=format_):

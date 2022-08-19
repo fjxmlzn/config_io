@@ -8,6 +8,9 @@ from .io import load as _load
 
 
 class Config(Dict):
+    def __missing__(self, key):
+        raise KeyError(key)
+
     def dump_to_file(self, path):
         _dump(path, self.to_dict())
 
